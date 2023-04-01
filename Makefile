@@ -8,4 +8,5 @@ gen-userlist:
 parse-memp:
 	@echo "Parsing and Profiling memory"
 	@go run ./cmd/parsetest/main.go -memprofile mem.prof
+	@go tool pprof -png mem.prof > mem.prof.png
 	@echo "Done"
