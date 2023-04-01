@@ -14,9 +14,9 @@ func main() {
 	}
 	for i := 1; i <= amount; i++ {
 		l.Users = append(l.Users, &j2e.User{
-			Name:    fmt.Sprintf("foo%07d", i),
+			Name:    fmt.Sprintf("user%07d", i),
 			Age:     20,
-			Profile: "barbarbarbarbarbarbarbarbarbarbarbar",
+			Profile: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
 		})
 	}
 
