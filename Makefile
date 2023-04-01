@@ -1,6 +1,6 @@
-.PHONY: gen-users-json
+.PHONY: gen-userlist
 
-gen-users-json:
-	@echo "Generating users.json"
-	@go run ./cmd/usersjson/main.go > ./data/users.json
+gen-userlist:
+	@echo "Generating userlist.json"
+	@go run ./cmd/usersjson/main.go > ./data/userlist.json
 	@echo "Done"
