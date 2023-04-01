@@ -19,7 +19,7 @@ func TestUserExcelData_ParseJSON(t *testing.T) {
 		fields   fields
 		args     args
 		wantErr  bool
-		wantData *UserExcelData
+		wantData *UserList
 	}{
 		{
 			name:   "success 2 users",
@@ -28,7 +28,7 @@ func TestUserExcelData_ParseJSON(t *testing.T) {
 				j: strings.NewReader(`{"users":[{"name":"foo","age":20,"profile":"bar"},{"name":"foo2","age":20,"profile":"bar2"}]}`),
 			},
 			wantErr: false,
-			wantData: &UserExcelData{
+			wantData: &UserList{
 				Users: []*User{
 					{
 						Name:    "foo",
@@ -46,7 +46,7 @@ func TestUserExcelData_ParseJSON(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			u := &UserExcelData{
+			u := &UserList{
 				Users: tt.fields.Users,
 			}
 			if err := u.ParseJSON(tt.args.j); (err != nil) != tt.wantErr {
