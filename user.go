@@ -15,7 +15,8 @@ type UserList struct {
 	Users []*User `json:"users"`
 }
 
-func (u *UserList) ParseJSON(j io.Reader) error {
+// ParseJSONCase1 は、ユーザー一覧をまとめて1回でパースする。
+func (u *UserList) ParseJSONCase1(j io.Reader) error {
 	dec := json.NewDecoder(j)
 	if err := dec.Decode(u); err != nil {
 		return err

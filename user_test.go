@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-func TestUserExcelData_ParseJSON(t *testing.T) {
+func TestUserExcelData_ParseJSONCase1(t *testing.T) {
 	type fields struct {
 		Users []*User
 	}
@@ -49,12 +49,12 @@ func TestUserExcelData_ParseJSON(t *testing.T) {
 			u := &UserList{
 				Users: tt.fields.Users,
 			}
-			if err := u.ParseJSON(tt.args.j); (err != nil) != tt.wantErr {
-				t.Errorf("ParseJSON() error = %v, wantErr %v", err, tt.wantErr)
+			if err := u.ParseJSONCase1(tt.args.j); (err != nil) != tt.wantErr {
+				t.Errorf("ParseJSONCase1() error = %v, wantErr %v", err, tt.wantErr)
 			}
 			// go-cmpでdataを比較する
 			if diff := cmp.Diff(u, tt.wantData); diff != "" {
-				t.Errorf("ParseJSON() diff = %v", diff)
+				t.Errorf("ParseJSONCase1() diff = %v", diff)
 			}
 		})
 	}

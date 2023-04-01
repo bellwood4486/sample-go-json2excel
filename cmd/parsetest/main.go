@@ -12,8 +12,11 @@ import (
 
 var cpuprofile = flag.String("cpuprofile", "", "write cpu profile to `file`")
 var memprofile = flag.String("memprofile", "", "write memory profile to `file`")
+var parseCase = flag.Int("case", 1, "parse case")
 
 func main() {
+	flag.Parse()
+
 	f, err := os.Open("./data/userlist.json")
 	if err != nil {
 		log.Fatal(err)
@@ -25,8 +28,6 @@ func main() {
 	defer func(s time.Time) {
 		fmt.Printf("elapsed: %s\n", time.Since(s))
 	}(start)
-
-	flag.Parse()
 
 	// CPUプロファイルを取得する
 	if *cpuprofile != "" {
@@ -43,11 +44,17 @@ func main() {
 
 	// 重いJSONのパース処理
 	l := &j2e.UserList{}
-	err = l.ParseJSON(f)
+	fmt.Printf("parse case: %d\n", *parseCase)
+	switch *parseCase {
+	case 1:
+		err = l.ParseJSONCase1(f)
+	default:
+		log.Fatalf("unknown case: %d", *parseCase)
+	}
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("uers: %d\n", len(l.Users))
+	fmt.Printf("loaded uers: %d\n", len(l.Users))
 
 	// メモリプロファイルを取得する
 	if *memprofile != "" {
