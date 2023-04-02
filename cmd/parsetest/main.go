@@ -42,7 +42,7 @@ func main() {
 		defer pprof.StopCPUProfile()
 	}
 
-	// 重いJSONのパース処理
+	// 重いJSONからExcelを作る
 	fmt.Printf("parse case: %d\n", *parseCase)
 	switch *parseCase {
 	case 1:
