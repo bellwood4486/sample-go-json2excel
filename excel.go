@@ -1,6 +1,7 @@
 package sample_go_json2excel
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/xuri/excelize/v2"
 	"io"
@@ -55,6 +56,92 @@ func ExcelizeUserList(list *UserList) error {
 }
 
 func ExcelizeUserListJSON(j io.Reader) error {
+	f := excelize.NewFile()
+	defer f.Close() // サンプルコードなのでエラーハンドリングは省略
+
+	sw, err := f.NewStreamWriter("Sheet1")
+	if err != nil {
+		return err
+	}
+
+	// ヘッダーを書き込む
+	if err := sw.SetRow("A1",
+		[]interface{}{
+			excelize.Cell{Value: "Name"},
+			excelize.Cell{Value: "Age"},
+			excelize.Cell{Value: "Profile"},
+		},
+		excelize.RowOpts{Height: 45, Hidden: false}); err != nil {
+		return err
+	}
+
+	// ユーザーを一人一行で書き込む
+	rowID := 1
+	dec := json.NewDecoder(j)
+	for {
+		t, err := dec.Token()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			return err
+		}
+
+		if elem, ok := t.(string); ok {
+			switch elem {
+			case "users":
+				if err := ExcelizeUsersJSON(dec, func(u *User) error {
+					rowID++
+					cell, err := excelize.CoordinatesToCellName(1, rowID)
+					if err != nil {
+						return err
+					}
+					if err := sw.SetRow(cell, []interface{}{
+						excelize.Cell{Value: u.Name},
+						excelize.Cell{Value: u.Age},
+						excelize.Cell{Value: u.Profile},
+					}); err != nil {
+						return err
+					}
+					return nil
+				}); err != nil {
+					return err
+				}
+			}
+		}
+	}
+
+	if err := sw.Flush(); err != nil {
+		return err
+	}
+	if err := f.SaveAs("Book1.xlsx"); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func ExcelizeUsersJSON(dec *json.Decoder, fn func(u *User) error) error {
+	t, err := dec.Token()
+	if err != nil {
+		return err
+	}
+	// ユーザーの集合は配列で入っているはずなのでそれをチェック
+	if elem, ok := t.(json.Delim); !ok || elem != '[' {
+		return ErrInvalidJSON
+	}
+
+	for dec.More() {
+		var user User
+		if err := dec.Decode(&user); err != nil {
+			return err
+		}
+		if err := fn(&user); err != nil {
+			return err
+		}
+
+	}
+
 	return nil
 }
 

@@ -16,3 +16,9 @@ parse2-memp:
 	@go run ./cmd/parsetest/main.go -case 2 -memprofile mem2.prof
 	@go tool pprof -png mem2.prof > mem2.prof.png
 	@echo "Done"
+
+parse3-memp:
+	@echo "Parsing(Case3) and Memory Profiling"
+	@go run ./cmd/parsetest/main.go -case 3 -memprofile mem3.prof
+	@go tool pprof -png mem3.prof > mem3.prof.png
+	@echo "Done"

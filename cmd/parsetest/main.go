@@ -64,6 +64,11 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
+	case 3:
+		err = j2e.ExcelizeUserListJSON(f)
+		if err != nil {
+			log.Fatal(err)
+		}
 	default:
 		log.Fatalf("unknown case: %d", *parseCase)
 	}
