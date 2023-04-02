@@ -14,6 +14,9 @@ This project tries 3 cases for combination of loading and converting methods.
 | Case 2 | stream       | stream                   | yes                             |
 | Case 3 | stream       | stream                   | no                              |
 
+Code of each case is in the following files.
+- [excel.go](excel.go)
+
 The data in the JSON file is as follows.
 
 * a user has the following fields.
