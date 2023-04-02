@@ -26,16 +26,18 @@ The data in the JSON file is as follows.
 
 The pprof results in the three cases are as follows.
 
-| Case 1                                                                                                             | Case 2                                                                                                             | Case 3                                                                                                             |
-|--------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
-| 238.05MB                                                                                                           | 257.08MB                                                                                                           | 20MB                                                                                                               |
-| ![mem1 prof](https://user-images.githubusercontent.com/2452581/229333094-922bc58e-4578-4e85-b105-70a8ff07aaf2.png) | ![mem2 prof](https://user-images.githubusercontent.com/2452581/229333098-7c81a37e-ea61-4e84-a117-09871e2424a1.png) | ![mem3 prof](https://user-images.githubusercontent.com/2452581/229333099-3a4e067d-9154-41e0-b7a4-5938286f3218.png) |
+| -           | Case 1                                                                                                             | Case 2                                                                                                             | Case 3                                                                                                             |
+|-------------|--------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
+| Used memory | 238.05MB                                                                                                           | 257.08MB                                                                                                           | 20MB                                                                                                               |
+| Time        | 4.005241083s                                                                                                       | 3.959007833s                                                                                                       | 3.859536417s                                                                                                       |
+| pprof       | ![mem1 prof](https://user-images.githubusercontent.com/2452581/229333094-922bc58e-4578-4e85-b105-70a8ff07aaf2.png) | ![mem2 prof](https://user-images.githubusercontent.com/2452581/229333098-7c81a37e-ea61-4e84-a117-09871e2424a1.png) | ![mem3 prof](https://user-images.githubusercontent.com/2452581/229333099-3a4e067d-9154-41e0-b7a4-5938286f3218.png) |
 
 ## How to run
 
 ### Prerequisites
 
 Generate the input JSON file by running the following command.
+
 ```bash
 make gen-userlist
 ````
@@ -45,11 +47,13 @@ make gen-userlist
 `make memp{case#}` runs the sample.
 
 For example, to run Case 1, run the following command.
+
 ```bash
 make memp1
 ```
 
 To run all cases, run the following command.
+
 ```bash
 make memp_all
 ```
