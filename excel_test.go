@@ -87,3 +87,81 @@ func TestExcelizeUserListJSON(t *testing.T) {
 		})
 	}
 }
+
+func TestToExcelCase1(t *testing.T) {
+	type args struct {
+		j io.Reader
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantErr bool
+	}{
+		{
+			name: "success",
+			args: args{
+				j: strings.NewReader(userListJSON),
+			},
+			wantErr: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if err := ToExcelCase1(tt.args.j); (err != nil) != tt.wantErr {
+				t.Errorf("ToExcelCase1() error = %v, wantErr %v", err, tt.wantErr)
+			}
+		})
+	}
+}
+
+func TestToExcelCase2(t *testing.T) {
+	type args struct {
+		j io.Reader
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantErr bool
+	}{
+		{
+			name: "success",
+			args: args{
+				j: strings.NewReader(userListJSON),
+			},
+			wantErr: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if err := ToExcelCase2(tt.args.j); (err != nil) != tt.wantErr {
+				t.Errorf("ToExcelCase2() error = %v, wantErr %v", err, tt.wantErr)
+			}
+		})
+	}
+}
+
+func TestToExcelCase3(t *testing.T) {
+	type args struct {
+		j io.Reader
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantErr bool
+	}{
+		{
+			name: "success",
+			args: args{
+				j: strings.NewReader(userListJSON),
+			},
+			wantErr: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if err := ToExcelCase3(tt.args.j); (err != nil) != tt.wantErr {
+				t.Errorf("ToExcelCase3() error = %v, wantErr %v", err, tt.wantErr)
+			}
+		})
+	}
+}

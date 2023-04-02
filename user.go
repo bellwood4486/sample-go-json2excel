@@ -8,16 +8,6 @@ import (
 
 var ErrInvalidJSON = fmt.Errorf("invalid json")
 
-type User struct {
-	Name    string `json:"name"`
-	Age     int    `json:"age"`
-	Profile string `json:"profile"`
-}
-
-type UserList struct {
-	Users []*User `json:"users"`
-}
-
 // ParseJSONCase1 は、ユーザー一覧をまとめて1回でパースする。
 func (u *UserList) ParseJSONCase1(j io.Reader) error {
 	dec := json.NewDecoder(j)
