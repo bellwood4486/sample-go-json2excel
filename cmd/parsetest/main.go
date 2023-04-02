@@ -51,6 +51,12 @@ func main() {
 		err = j2e.ToExcelCase2(f)
 	case 3:
 		err = j2e.ToExcelCase3(f)
+	case 4:
+		// JSONのパースだけを行う
+		_, err = j2e.ParseJSONBulk(f)
+	case 5:
+		// JSONのパースだけを行う
+		_, err = j2e.ParseJSONStream(f)
 	default:
 		log.Fatalf("unknown case: %d", *parseCase)
 	}

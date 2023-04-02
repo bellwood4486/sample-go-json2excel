@@ -25,7 +25,7 @@ type UserList struct {
 // * JSONのパース: bulk
 // * Excelの書き込み: stream
 func ToExcelCase1(j io.Reader) error {
-	list, err := parseJSONBulk(j)
+	list, err := ParseJSONBulk(j)
 	if err != nil {
 		return err
 	}
@@ -42,7 +42,7 @@ func ToExcelCase1(j io.Reader) error {
 // * JSONのパース: stream
 // * Excelの書き込み: stream
 func ToExcelCase2(j io.Reader) error {
-	list, err := parseJSONStream(j)
+	list, err := ParseJSONStream(j)
 	if err != nil {
 		return err
 	}
@@ -62,7 +62,7 @@ func ToExcelCase3(j io.Reader) error {
 	return parseJSONAndCreateExcelStream(j)
 }
 
-func parseJSONBulk(j io.Reader) (*UserList, error) {
+func ParseJSONBulk(j io.Reader) (*UserList, error) {
 	dec := json.NewDecoder(j)
 	var list UserList
 	if err := dec.Decode(&list); err != nil {
@@ -72,7 +72,7 @@ func parseJSONBulk(j io.Reader) (*UserList, error) {
 	return &list, nil
 }
 
-func parseJSONStream(j io.Reader) (*UserList, error) {
+func ParseJSONStream(j io.Reader) (*UserList, error) {
 	dec := json.NewDecoder(j)
 	var list UserList
 	for {
