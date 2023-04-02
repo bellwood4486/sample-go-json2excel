@@ -19,3 +19,5 @@ memp4:
 
 memp5:
 	./memprof.sh 5
+
+memp_all: memp1 memp2 memp3 memp4 memp5
