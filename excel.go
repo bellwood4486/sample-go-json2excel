@@ -167,6 +167,7 @@ func parseJSONAndCreateExcelStream(j io.Reader) error {
 	return nil
 }
 
+// ユーザー一人ごとに `fn` を呼び出す。
 func parseUsers(dec *json.Decoder, fn func(u *User) error) error {
 	t, err := dec.Token()
 	if err != nil {
