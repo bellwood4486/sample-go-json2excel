@@ -48,6 +48,8 @@ func main() {
 	switch *parseCase {
 	case 1:
 		err = l.ParseJSONCase1(f)
+	case 2:
+		err = l.ParseJSONCase2(f)
 	default:
 		log.Fatalf("unknown case: %d", *parseCase)
 	}
