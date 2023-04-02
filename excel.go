@@ -3,8 +3,60 @@ package sample_go_json2excel
 import (
 	"fmt"
 	"github.com/xuri/excelize/v2"
+	"io"
 	"math/rand"
 )
+
+func ExcelizeUserList(list *UserList) error {
+	f := excelize.NewFile()
+	defer f.Close() // サンプルコードなのでエラーハンドリングは省略
+
+	sw, err := f.NewStreamWriter("Sheet1")
+	if err != nil {
+		return err
+	}
+
+	// ヘッダーを書き込む
+	if err := sw.SetRow("A1",
+		[]interface{}{
+			excelize.Cell{Value: "Name"},
+			excelize.Cell{Value: "Age"},
+			excelize.Cell{Value: "Profile"},
+		},
+		excelize.RowOpts{Height: 45, Hidden: false}); err != nil {
+		return err
+	}
+
+	// ユーザーを一人一行で書き込む
+	rowID := 1
+	for _, user := range list.Users {
+		rowID++
+		cell, err := excelize.CoordinatesToCellName(1, rowID)
+		if err != nil {
+			return err
+		}
+		if err := sw.SetRow(cell, []interface{}{
+			excelize.Cell{Value: user.Name},
+			excelize.Cell{Value: user.Age},
+			excelize.Cell{Value: user.Profile},
+		}); err != nil {
+			return err
+		}
+	}
+
+	if err := sw.Flush(); err != nil {
+		return err
+	}
+	if err := f.SaveAs("Book1.xlsx"); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func ExcelizeUserListJSON(j io.Reader) error {
+	return nil
+}
 
 func Excelize() {
 	f := excelize.NewFile()

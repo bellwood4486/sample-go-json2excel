@@ -48,8 +48,22 @@ func main() {
 	switch *parseCase {
 	case 1:
 		err = l.ParseJSONCase1(f)
+		if err != nil {
+			log.Fatal(err)
+		}
+		err = j2e.ExcelizeUserList(l)
+		if err != nil {
+			log.Fatal(err)
+		}
 	case 2:
 		err = l.ParseJSONCase2(f)
+		if err != nil {
+			log.Fatal(err)
+		}
+		err = j2e.ExcelizeUserList(l)
+		if err != nil {
+			log.Fatal(err)
+		}
 	default:
 		log.Fatalf("unknown case: %d", *parseCase)
 	}
