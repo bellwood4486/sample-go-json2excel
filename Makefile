@@ -1,24 +1,21 @@
-.PHONY: gen-userlist parse1-memp parse2-memp
+.PHONY: gen-userlist memp1 memp2 memp3 memp4 memp5
 
 gen-userlist:
 	@echo "Generating userlist.json"
 	@go run ./cmd/usersjson/main.go > ./data/userlist.json
 	@echo "Done"
 
-parse1-memp:
-	@echo "Parsing(Case1) and Memory Profiling"
-	@go run ./cmd/parsetest/main.go -case 1 -memprofile mem1.prof
-	@go tool pprof -png mem1.prof > mem1.prof.png
-	@echo "Done"
+memp1:
+	./memprof.sh 1
 
-parse2-memp:
-	@echo "Parsing(Case2) and Memory Profiling"
-	@go run ./cmd/parsetest/main.go -case 2 -memprofile mem2.prof
-	@go tool pprof -png mem2.prof > mem2.prof.png
-	@echo "Done"
+memp2:
+	./memprof.sh 2
 
-parse3-memp:
-	@echo "Parsing(Case3) and Memory Profiling"
-	@go run ./cmd/parsetest/main.go -case 3 -memprofile mem3.prof
-	@go tool pprof -png mem3.prof > mem3.prof.png
-	@echo "Done"
+memp3:
+	./memprof.sh 3
+
+memp4:
+	./memprof.sh 4
+
+memp5:
+	./memprof.sh 5
