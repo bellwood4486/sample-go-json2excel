@@ -43,42 +43,20 @@ func main() {
 	}
 
 	// 重いJSONのパース処理
-	l := &j2e.UserList{}
 	fmt.Printf("parse case: %d\n", *parseCase)
 	switch *parseCase {
 	case 1:
 		err = j2e.ToExcelCase1(f)
-		//err = l.ParseJSONCase1(f)
-		//if err != nil {
-		//	log.Fatal(err)
-		//}
-		//err = j2e.ExcelizeUserList(l)
-		//if err != nil {
-		//	log.Fatal(err)
-		//}
 	case 2:
 		err = j2e.ToExcelCase2(f)
-		//err = l.ParseJSONCase2(f)
-		//if err != nil {
-		//	log.Fatal(err)
-		//}
-		//err = j2e.ExcelizeUserList(l)
-		//if err != nil {
-		//	log.Fatal(err)
-		//}
 	case 3:
 		err = j2e.ToExcelCase3(f)
-		//err = j2e.ExcelizeUserListJSON(f)
-		//if err != nil {
-		//	log.Fatal(err)
-		//}
 	default:
 		log.Fatalf("unknown case: %d", *parseCase)
 	}
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("loaded uers: %d\n", len(l.Users))
 
 	// メモリプロファイルを取得する
 	if *memprofile != "" {

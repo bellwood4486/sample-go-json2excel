@@ -1,8 +1,10 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	j2e "github.com/bellwood4486/sample-go-json2excel"
+	"io"
 	"log"
 	"os"
 )
@@ -20,8 +22,17 @@ func main() {
 		})
 	}
 
-	err := l.ToJSON(os.Stdout)
+	err := toJSON(&l, os.Stdout)
 	if err != nil {
 		log.Fatal(err)
 	}
+}
+
+func toJSON(l *j2e.UserList, w io.Writer) error {
+	enc := json.NewEncoder(w)
+	if err := enc.Encode(l); err != nil {
+		return err
+	}
+
+	return nil
 }

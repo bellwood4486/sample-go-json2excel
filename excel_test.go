@@ -6,87 +6,34 @@ import (
 	"testing"
 )
 
-func TestExcelize(t *testing.T) {
-	tests := []struct {
-		name string
-	}{
-		{
-			name: "success",
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			Excelize()
-		})
-	}
-}
+const (
+	// ユーザーリストのJSON
+	userListJSON = `
+{
+	"users":[
+		{"name":"foo","age":20,"profile":"bar"},
+		{"name":"foo2","age":20,"profile":"bar2"}
+	]
+}`
+)
 
-func TestExcelizeStream(t *testing.T) {
-	tests := []struct {
-		name string
-	}{
-		{
-			name: "success",
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			ExcelizeStream()
-		})
-	}
-}
-
-func TestExcelizeUserList(t *testing.T) {
-	type args struct {
-		list *UserList
-	}
-	tests := []struct {
-		name    string
-		args    args
-		wantErr bool
-	}{
-		{
-			name: "success",
-			args: args{
-				list: userList,
+var (
+	// ユーザーリストのJSONをパースした結果
+	userList = &UserList{
+		Users: []*User{
+			{
+				Name:    "foo",
+				Age:     20,
+				Profile: "bar",
 			},
-			wantErr: false,
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if err := ExcelizeUserList(tt.args.list); (err != nil) != tt.wantErr {
-				t.Errorf("ExcelizeUserList() error = %v, wantErr %v", err, tt.wantErr)
-			}
-		})
-	}
-}
-
-func TestExcelizeUserListJSON(t *testing.T) {
-	type args struct {
-		j io.Reader
-	}
-	tests := []struct {
-		name    string
-		args    args
-		wantErr bool
-	}{
-		{
-			name: "success",
-			args: args{
-				j: strings.NewReader(userListJSON),
+			{
+				Name:    "foo2",
+				Age:     20,
+				Profile: "bar2",
 			},
-			wantErr: false,
 		},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if err := ExcelizeUserListJSON(tt.args.j); (err != nil) != tt.wantErr {
-				t.Errorf("ExcelizeUserListJSON() error = %v, wantErr %v", err, tt.wantErr)
-			}
-		})
-	}
-}
+)
 
 func TestToExcelCase1(t *testing.T) {
 	type args struct {
